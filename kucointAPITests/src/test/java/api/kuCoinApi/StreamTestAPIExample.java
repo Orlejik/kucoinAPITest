@@ -5,10 +5,7 @@ import org.asynchttpclient.util.Assertions;
 import org.junit.Test;
 import org.testng.Assert;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
@@ -60,10 +57,11 @@ public class StreamTestAPIExample {
 
     @Test
     public void map(){
-        Map<String, Float> usd = new HashMap<>();
-        List<String> tickersLowerCase = getAllTickers().stream().map(x->x.getSymbol().toLowerCase()).collect(Collectors.toList());
-        getAllTickers().stream().forEach(x->usd.put(x.getSymbol(), Float.parseFloat(x.getChangeRate())));
+//        Map<String, Float> usd = new HashMap<>();
+//        List<String> tickersLowerCase = getAllTickers().stream().map(x->x.getSymbol().toLowerCase()).collect(Collectors.toList());
+//        getAllTickers().stream().forEach(x->usd.put(x.getSymbol(), Float.parseFloat(x.getChangeRate())));
 
-        int i=3;
+        List<TickerShort> shortList = new ArrayList<>();
+        getAllTickers().stream().forEach(x->shortList.add(new TickerShort(x.getSymbol(), Float.parseFloat(x.getChangeRate()))));
     }
 }
